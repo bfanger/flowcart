@@ -1,0 +1,54 @@
+{
+  "name": "svelte-project-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "start": "svelte-kit preview",
+    "lint": "prettier --check --loglevel=warn 'src/**/*.svelte' && tsc --noEmit && svelte-check --fail-on-warnings --fail-on-hints && eslint --max-warnings 0 src",
+    "format": "prettier --write . && eslint --fix src",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts?(x)": [
+      "eslint --max-warnings 0 --ext ts,tsx --no-ignore",
+      "sh -c 'tsc -p tsconfig.json --noEmit'"
+    ],
+    "*.js": [
+      "eslint --max-warnings 0 --ext js --no-ignore"
+    ],
+    "*.svelte": [
+      "svelte-check --fail-on-warnings --fail-on-hints",
+      "prettier --check"
+    ]
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^1.0.0-next.13",
+    "@sveltejs/kit": "^1.0.0-next.115",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-only-warn": "^1.0.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "lint-staged": "^11.0.0",
+    "prettier": "~2.3.0",
+    "prettier-plugin-svelte": "^2.3.0",
+    "sass": "^1.34.1",
+    "svelte": "^3.34.0",
+    "svelte-check": "^2.1.0",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.3.6"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^4.2.0",
+    "@babylonjs/inspector": "^4.2.0",
+    "@babylonjs/loaders": "^4.2.0"
+  }
+}
