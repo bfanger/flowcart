@@ -2,7 +2,7 @@
   import Babylon from "$lib/Babylon.svelte";
 </script>
 
-<Babylon><slot /></Babylon>
+<Babylon debug><slot /></Babylon>
 
 <style>
   :global(html),

@@ -1,20 +1,40 @@
+<script context="module" lang="ts">
+  import type { AbstractMesh, Scene } from "@babylonjs/core";
+
+  export type FlowCartContext = {
+    assets: Scene;
+  };
+</script>
+
 <script lang="ts">
-  import { Engine, SceneLoader } from "@babylonjs/core";
+  import { SceneLoader } from "@babylonjs/core";
   import "@babylonjs/loaders";
-  import { getContext } from "svelte";
-  import { get } from "svelte/store";
+  import { getContext, onDestroy, onMount, setContext } from "svelte";
   import type { BabylonContext } from "./Babylon.svelte";
 
   let ready = false;
-  const context = getContext<BabylonContext>("Babylon");
-  const { scene, engine } = get(context);
-  SceneLoader.Append("/", "flow-cart.glb", scene, (room) => {
-    console.log("load", room);
-    room.lights.forEach((light) => {
-      light.intensity *= 0.3;
+
+  const { scene } = getContext<BabylonContext>("Babylon");
+
+  const context: FlowCartContext = { assets: undefined as any };
+
+  setContext("FlowCart", context);
+
+  onMount(() => {
+    let ref: AbstractMesh;
+    SceneLoader.Append("/", "flow-cart.glb", scene, (assets) => {
+      context.assets = assets;
+      ref = assets.getMeshByID("__root__");
+
+      assets.lights.forEach((light) => {
+        light.intensity *= 0.3;
+      });
+      ready = true;
     });
 
-    ready = true;
+    return function onDestroy() {
+      ref.dispose();
+    };
   });
 </script>
 

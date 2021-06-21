@@ -9,5 +9,14 @@ export default {
     target: "svelte-app",
     ssr: false,
     adapter: adapter(),
+    vite: {
+      optimizeDeps: {
+        include: [
+          "@babylonjs/core",
+          "@babylonjs/loaders",
+          "@babylonjs/inspector",
+        ],
+      },
+    },
   },
 };

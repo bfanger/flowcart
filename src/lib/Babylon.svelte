@@ -7,30 +7,29 @@
     MeshBuilder,
     StandardMaterial,
     Color3,
+    Mesh,
   } from "@babylonjs/core";
-  import type { Writable } from "svelte/store";
-  export type BabylonContext = Writable<{
+
+  export type BabylonContext = {
     engine: Engine;
     scene: Scene;
-  }>;
+  };
 </script>
 
 <script lang="ts">
   import { onMount, setContext } from "svelte";
-  import { writable } from "svelte/store";
 
   export let debug = false;
 
   let canvas: HTMLCanvasElement;
   let ready = false;
-  let scene: Scene;
 
-  const context: BabylonContext = writable(undefined as any);
+  const context: BabylonContext = {} as any;
   setContext("Babylon", context);
 
   onMount(() => {
-    const engine = new Engine(canvas);
-    scene = new Scene(engine);
+    const engine = (context.engine = new Engine(canvas));
+    const scene = (context.scene = new Scene(engine));
 
     const ground = MeshBuilder.CreateGround("ground", {
       width: 10,
@@ -44,7 +43,8 @@
 
     let promise: Promise<void>;
     const camera = new FlyCamera("Camera", new Vector3(-1, 1.5, -2.5), scene);
-    camera.setTarget(new Vector3(-4, 1.5, -2.5));
+    // camera.setTarget(new Vector3(-4, 1.5, -2.5));
+    camera.setTarget(new Vector3(0, 1.5, -2.5));
     camera.attachControl();
 
     if (vr) {
@@ -57,7 +57,6 @@
       promise = Promise.resolve();
     }
     promise.then(() => {
-      $context = { engine, scene };
       ready = true;
       engine.runRenderLoop(() => {
         scene.render();
@@ -79,9 +78,9 @@
   async function toggleInspector(enabled: boolean) {
     if (enabled) {
       await import("@babylonjs/inspector");
-      scene.debugLayer.show();
+      context.scene.debugLayer.show();
     } else {
-      scene.debugLayer.hide();
+      context.scene.debugLayer.hide();
     }
   }
 </script>
