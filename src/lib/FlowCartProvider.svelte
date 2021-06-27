@@ -9,7 +9,7 @@
 <script lang="ts">
   import { SceneLoader } from "@babylonjs/core";
   import "@babylonjs/loaders";
-  import { getContext, onDestroy, onMount, setContext } from "svelte";
+  import { getContext, onMount, setContext } from "svelte";
   import type { BabylonContext } from "./Babylon.svelte";
 
   let ready = false;

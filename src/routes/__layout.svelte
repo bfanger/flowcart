@@ -1,8 +1,4 @@
-<script lang="ts">
-  import Babylon from "$lib/Babylon.svelte";
-</script>
-
-<Babylon debug><slot /></Babylon>
+<slot />
 
 <style>
   :global(html),

@@ -7,7 +7,6 @@
     MeshBuilder,
     StandardMaterial,
     Color3,
-    Mesh,
   } from "@babylonjs/core";
 
   export type BabylonContext = {
@@ -20,6 +19,7 @@
   import { onMount, setContext } from "svelte";
 
   export let debug = false;
+  export let depth = 4;
 
   let canvas: HTMLCanvasElement;
   let ready = false;
@@ -32,19 +32,18 @@
     const scene = (context.scene = new Scene(engine));
 
     const ground = MeshBuilder.CreateGround("ground", {
-      width: 10,
-      height: 10,
+      width: 5 * depth,
+      height: 5 + depth * 1.35,
     });
-    ground.position.set(-5, -0.001, -5);
+    ground.position.set(depth * 5 - 10, -0.001, depth * -1.35 + 1.35);
     const groundMaterial = new StandardMaterial("ground", scene);
     groundMaterial.diffuseColor = new Color3(0.01, 0.01, 0.01);
     ground.material = groundMaterial;
     const vr = true;
 
     let promise: Promise<void>;
-    const camera = new FlyCamera("Camera", new Vector3(-1, 1.5, -2.5), scene);
-    // camera.setTarget(new Vector3(-4, 1.5, -2.5));
-    camera.setTarget(new Vector3(0, 1.5, -2.5));
+    const camera = new FlyCamera("Camera", new Vector3(1, 1.5, 2.5), scene);
+    camera.setTarget(new Vector3(5, 1.5, 2.5));
     camera.attachControl();
 
     if (vr) {
