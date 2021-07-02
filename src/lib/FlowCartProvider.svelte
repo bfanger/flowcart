@@ -1,20 +1,23 @@
 <script context="module" lang="ts">
   import type { AbstractMesh, Scene } from "@babylonjs/core";
 
-  export type FlowCartContext = {
+  type FlowCartContext = {
     assets: Scene;
   };
+  export function getFlowCartContext() {
+    return getContext<FlowCartContext>("FlowCart");
+  }
 </script>
 
 <script lang="ts">
   import { SceneLoader } from "@babylonjs/core";
   import "@babylonjs/loaders";
   import { getContext, onMount, setContext } from "svelte";
-  import type { BabylonContext } from "./Babylon.svelte";
+  import { getBabylonContext } from "./Babylon.svelte";
 
   let ready = false;
 
-  const { scene } = getContext<BabylonContext>("Babylon");
+  const { scene } = getBabylonContext();
 
   const context: FlowCartContext = { assets: undefined as any };
 

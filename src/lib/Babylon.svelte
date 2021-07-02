@@ -1,25 +1,30 @@
 <script context="module" lang="ts">
+  import { getContext, onMount, setContext } from "svelte";
   import {
     Scene,
     Engine,
     Vector3,
-    FlyCamera,
     MeshBuilder,
     StandardMaterial,
     Color3,
+    HemisphericLight,
+    ActionManager,
+    UniversalCamera,
   } from "@babylonjs/core";
 
-  export type BabylonContext = {
+  type BabylonContext = {
     engine: Engine;
     scene: Scene;
+    actionManager: ActionManager;
   };
+  export function getBabylonContext() {
+    return getContext<BabylonContext>("Babylon");
+  }
 </script>
 
 <script lang="ts">
-  import { onMount, setContext } from "svelte";
-
   export let debug = false;
-  export let depth = 4;
+  export let depth: number;
 
   let canvas: HTMLCanvasElement;
   let ready = false;
@@ -30,21 +35,28 @@
   onMount(() => {
     const engine = (context.engine = new Engine(canvas));
     const scene = (context.scene = new Scene(engine));
+    context.actionManager = new ActionManager(scene);
 
     const ground = MeshBuilder.CreateGround("ground", {
       width: 5 * depth,
-      height: 5 + depth * 1.35,
+      height: depth * 1.35 * 2,
     });
-    ground.position.set(depth * 5 - 10, -0.001, depth * -1.35 + 1.35);
+    ground.position.set(depth * 2.5, -0.001, 0);
     const groundMaterial = new StandardMaterial("ground", scene);
     groundMaterial.diffuseColor = new Color3(0.01, 0.01, 0.01);
     ground.material = groundMaterial;
     const vr = true;
 
     let promise: Promise<void>;
-    const camera = new FlyCamera("Camera", new Vector3(1, 1.5, 2.5), scene);
+    const camera = new UniversalCamera(
+      "camera",
+      new Vector3(1, 1.5, 2.5),
+      scene
+    );
     camera.setTarget(new Vector3(5, 1.5, 2.5));
     camera.attachControl();
+
+    new HemisphericLight("sun", new Vector3(0, 0, 0), scene);
 
     if (vr) {
       promise = scene

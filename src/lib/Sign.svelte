@@ -7,15 +7,14 @@
     StandardMaterial,
   } from "@babylonjs/core";
 
-  import { getContext } from "svelte";
-  import type { BabylonContext } from "./Babylon.svelte";
+  import { getBabylonContext } from "./Babylon.svelte";
 
   export let mesh: Mesh;
   export let text: string;
   export let color: string = "white";
   export let background: string;
 
-  const { scene } = getContext<BabylonContext>("Babylon");
+  const { scene } = getBabylonContext();
 
   const sign = MeshBuilder.CreatePlane(
     "sign",

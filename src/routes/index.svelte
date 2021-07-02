@@ -9,6 +9,7 @@
     <a class="button" href="/uren-boeken">Start</a>
   </div>
 </div>
+<slot />
 
 <style>
   .background {

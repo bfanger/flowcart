@@ -2,10 +2,10 @@
   import QuestionRoom from "$lib/QuestionRoom.svelte";
   import Sign from "$lib/Sign.svelte";
   import Node from "$lib/Node.svelte";
-  import type { FlowCartData } from "./types";
-  import { getContext, onMount } from "svelte";
-  import type { BabylonContext } from "./Babylon.svelte";
+  import type { FlowCartData, Choice } from "./types";
+  import { onMount } from "svelte";
   import { Mesh, Vector3 } from "@babylonjs/core";
+  import { getBabylonContext } from "./Babylon.svelte";
 
   export let question: string;
   export let yes: FlowCartData | undefined = undefined;
@@ -16,7 +16,9 @@
   export let x = 0;
   export let z = 0;
 
-  const { scene } = getContext<BabylonContext>("Babylon");
+  let choice: Choice = "UNKNOWN";
+
+  const { scene } = getBabylonContext();
 
   const mesh = new Mesh(id, scene);
   if (parent) {
@@ -32,12 +34,21 @@
   });
 </script>
 
-<QuestionRoom {mesh} />
+<QuestionRoom
+  {mesh}
+  {choice}
+  on:yes={() => {
+    choice = "YES";
+  }}
+  on:no={() => {
+    choice = "NO";
+  }}
+/>
 <Sign {mesh} text={question} background="#5631E8" />
 
-{#if yes}
-  <Node id="yes" data={yes} x={5} z={-1.45} parent={mesh} />
+{#if yes && choice === "YES"}
+  <Node id="yes" data={yes} x={x + 5} z={z + 1.45} parent={mesh} />
 {/if}
-{#if no}
-  <Node id="no" data={no} x={5} z={1.45} parent={mesh} />
+{#if no && choice === "NO"}
+  <Node id="no" data={no} x={x + 5} z={z - 1.45} parent={mesh} />
 {/if}
