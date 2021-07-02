@@ -13,20 +13,21 @@
   export let text: string;
   export let color: string = "white";
   export let background: string;
+  export let big: boolean = false;
 
   const { scene } = getBabylonContext();
 
   const sign = MeshBuilder.CreatePlane(
     "sign",
-    { width: 2, height: 0.3 },
+    { width: big ? 4 : 2, height: big ? 1 : 0.3 },
     scene
   );
-  sign.position.set(4.99, 2.1, 2.5);
+  sign.position.set(4.99, big ? 1 : 2.1, 2.5);
   sign.rotation.set(0, 0.5 * Math.PI, 0);
 
   const textureGround = new DynamicTexture(
     "dynamic texture",
-    { width: 1024, height: 128 },
+    { width: big ? 2048 : 1024, height: big ? 256 : 128 },
     scene,
     true
   );

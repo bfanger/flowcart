@@ -5,7 +5,7 @@
 <div class="background" style="background-image: url('{background}')">
   <div class="panel">
     <h1>Welkom bij FlowCart</h1>
-    <p>Een "seated" VR experiment door Bob Fanger</p>
+    <p>Een VR experiment door Bob Fanger</p>
     <a class="button" href="/uren-boeken">Start</a>
   </div>
 </div>

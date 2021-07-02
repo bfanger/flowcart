@@ -32,12 +32,12 @@
       no: {
         question: "Werkt bestaande klant?",
         yes: {
-          answer: "Boek klantinvestering met duidelijke omschrijving",
+          answer: "Boek klantinvestering met een duidelijke omschrijving",
           color: yellow,
         },
         no: {
           answer:
-            "Boek sales activiteiten (nieuwe klanten) met duidelijke omschrijving",
+            "Boek sales activiteiten (nieuwe klanten) met een duidelijke omschrijving",
           color: yellow,
         },
       },
@@ -62,7 +62,8 @@
           no: {
             question: "Meeting niet klant?",
             yes: {
-              answer: "Book Meeting (niet klant) met duidelijke omschrijving",
+              answer:
+                "Book Meeting (niet klant) met een duidelijke omschrijving",
               color: green,
             },
             no: {
@@ -71,7 +72,7 @@
                 question: "Intere performance verbeteren?",
                 yes: {
                   answer:
-                    "Boek Professionalisering met duidelijke omschrijving",
+                    "Boek Professionalisering met een duidelijke omschrijving",
                   color: yellow,
                 },
                 no: {
@@ -82,7 +83,7 @@
               },
               no: {
                 answer:
-                  "Kan nergens anders op? Boek Diversen met duidelijk omschrijving",
+                  "Kan nergens anders op? Boek Diversen met een duidelijke omschrijving",
                 color: black,
               },
             },
@@ -90,7 +91,7 @@
         },
       },
     },
-  };
+  } as const;
 </script>
 
 <Babylon depth={7}>
