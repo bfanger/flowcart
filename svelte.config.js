@@ -7,7 +7,6 @@ export default {
   preprocess: preprocess(),
   kit: {
     target: "svelte-app",
-    ssr: false,
     adapter: adapter(),
     vite: {
       optimizeDeps: {
