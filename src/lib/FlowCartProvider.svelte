@@ -12,7 +12,7 @@
 <script lang="ts">
   import { SceneLoader } from "@babylonjs/core";
   import "@babylonjs/loaders";
-  import { getContext, onMount, setContext } from "svelte";
+  import { getContext, onDestroy, setContext } from "svelte";
   import { getBabylonContext } from "./Babylon.svelte";
 
   let ready = false;
@@ -23,21 +23,19 @@
 
   setContext("FlowCart", context);
 
-  onMount(() => {
-    let ref: AbstractMesh;
-    SceneLoader.Append("/", "flow-cart.glb", scene, (assets) => {
-      context.assets = assets;
-      ref = assets.getMeshByID("__root__");
+  let ref: AbstractMesh;
+  SceneLoader.Append("/", "flow-cart.glb", scene, (assets) => {
+    context.assets = assets;
+    ref = assets.getMeshByID("__root__");
 
-      assets.lights.forEach((light) => {
-        light.intensity *= 0.3;
-      });
-      ready = true;
+    assets.lights.forEach((light) => {
+      light.intensity *= 0.3;
     });
+    ready = true;
+  });
 
-    return function onDestroy() {
-      ref.dispose();
-    };
+  onDestroy(() => {
+    ref.dispose();
   });
 </script>
 

@@ -1,14 +1,15 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import type { Mesh } from "@babylonjs/core";
+  import type { Node } from "@babylonjs/core";
   import { getFlowCartContext } from "./FlowCartProvider.svelte";
-  import { getBabylonContext } from "./Babylon.svelte";
 
-  export let mesh: Mesh;
+  export let parent: Node;
 
   const { assets } = getFlowCartContext();
 
-  const room = assets.getTransformNodeByID("QuestionRoom").clone("room", mesh);
+  const room = assets
+    .getTransformNodeByID("QuestionRoom")
+    .clone("answerRoom", parent);
   room.scaling.set(1, 1, -1);
 
   onDestroy(() => {

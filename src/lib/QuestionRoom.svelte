@@ -1,53 +1,93 @@
 <script lang="ts">
-  import { tweened } from "svelte/motion";
   import { createEventDispatcher, onDestroy } from "svelte";
-  import { ActionManager, ExecuteCodeAction, Mesh } from "@babylonjs/core";
+  import {
+    ActionManager,
+    ExecuteCodeAction,
+    Node,
+    Animation,
+    Quaternion,
+    AbstractMesh,
+  } from "@babylonjs/core";
   import { getFlowCartContext } from "./FlowCartProvider.svelte";
   import { getBabylonContext } from "./Babylon.svelte";
   import type { Choice } from "./types";
 
-  export let mesh: Mesh;
+  export let parent: Node;
   export let choice: Choice;
+  let prevChoice = choice;
+  $: animateDoors(prevChoice, choice);
 
   const { scene } = getBabylonContext();
   const { assets } = getFlowCartContext();
   const dispatch = createEventDispatcher();
 
-  const yesAngle = tweened(0);
-  const noAngle = tweened(0);
-  $: yesAngle.set(choice === "YES" ? 0.6 * Math.PI : 0, {
-    duration: choice === "YES" ? 500 : 0,
-  });
-  $: noAngle.set(choice === "NO" ? 0.6 * Math.PI : 0, {
-    duration: choice === "NO" ? 500 : 0,
-  });
-
-  const room = assets.getTransformNodeByID("QuestionRoom").clone("room", mesh);
+  const room = assets
+    .getTransformNodeByID("QuestionRoom")
+    .clone("room", parent);
   room.scaling.set(1, 1, -1);
 
   const yes = assets.getTransformNodeByID("Yes").clone("yes", room);
-  yes.getChildMeshes().forEach((door) => {
+  yes.getChildMeshes().forEach((door, index) => {
+    door.rotation = door.rotationQuaternion.toEulerAngles();
+    door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
     door.actionManager.registerAction(
       new ExecuteCodeAction(ActionManager.OnPickTrigger, () => dispatch("yes"))
     );
+    addDoorAnimation(door, index === 0);
   });
-  yes.getChildMeshes()[0].rotationQuaternion = null;
-  yes.getChildMeshes()[1].rotationQuaternion = null;
-  $: yes.getChildMeshes()[0].rotation.set(0, $yesAngle * -1, 0);
-  $: yes.getChildMeshes()[1].rotation.set(0, $yesAngle, Math.PI * 1);
 
   const no = assets.getTransformNodeByID("No").clone("no", room);
-  no.getChildMeshes().forEach((door) => {
+  no.getChildMeshes().forEach((door, index) => {
+    door.rotation = door.rotationQuaternion.toEulerAngles();
+    door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
     door.actionManager.registerAction(
       new ExecuteCodeAction(ActionManager.OnPickTrigger, () => dispatch("no"))
     );
+    addDoorAnimation(door, index === 0);
   });
-  no.getChildMeshes()[0].rotationQuaternion = null;
-  no.getChildMeshes()[1].rotationQuaternion = null;
-  $: no.getChildMeshes()[0].rotation.set(0, $noAngle * -1, 0);
-  $: no.getChildMeshes()[1].rotation.set(0, $noAngle, Math.PI * 1);
+  function addDoorAnimation(door: AbstractMesh, left: boolean) {
+    const animation = new Animation(
+      "door" + (left ? "Left" : "Right"),
+      "rotation.y",
+      10,
+      Animation.ANIMATIONTYPE_FLOAT
+    );
+    animation.setKeys([
+      { frame: 0, value: 0 },
+      { frame: 5, value: 0.6 * Math.PI * (left ? -1 : 1) },
+      { frame: 10, value: 0 },
+    ]);
+
+    door.animations.push(animation);
+  }
+
+  function animateDoors(from: Choice, to: Choice) {
+    if (from === to) {
+      return;
+    }
+    prevChoice = to;
+    const [yesLeft, yesRight] = yes.getChildMeshes();
+    const [noLeft, noRight] = no.getChildMeshes();
+
+    if (to === "YES") {
+      scene.beginAnimation(yesLeft, 0, 5);
+      scene.beginAnimation(yesRight, 0, 5);
+      if (from === "NO") {
+        scene.beginAnimation(noLeft, 9, 10);
+        scene.beginAnimation(noRight, 9, 10);
+      }
+    }
+    if (to === "NO") {
+      scene.beginAnimation(noLeft, 0, 5);
+      scene.beginAnimation(noRight, 0, 5);
+      if (from === "YES") {
+        scene.beginAnimation(yesLeft, 9, 10);
+        scene.beginAnimation(yesRight, 9, 10);
+      }
+    }
+  }
 
   onDestroy(() => {
     no.dispose();

@@ -1,16 +1,16 @@
 <script lang="ts">
   import QuestionRoom from "$lib/QuestionRoom.svelte";
   import Sign from "$lib/Sign.svelte";
-  import Node from "$lib/Node.svelte";
+  import NodeComponent from "$lib/Node.svelte";
   import type { FlowCartData, Choice } from "./types";
-  import { onMount } from "svelte";
-  import { Mesh, Vector3 } from "@babylonjs/core";
+  import { onDestroy } from "svelte";
+  import { Node, TransformNode } from "@babylonjs/core";
   import { getBabylonContext } from "./Babylon.svelte";
 
   export let question: string;
   export let yes: FlowCartData | undefined = undefined;
   export let no: FlowCartData | undefined = undefined;
-  export let parent: Mesh = undefined;
+  export let parent: Node = undefined;
   export let id: string;
 
   export let x = 0;
@@ -20,22 +20,20 @@
 
   const { scene } = getBabylonContext();
 
-  const mesh = new Mesh(id, scene);
+  const node = new TransformNode(id, scene);
   if (parent) {
-    parent.addChild(mesh);
+    node.setParent(parent);
   }
-  onMount(() => {
-    mesh.translate(new Vector3(1, 0, 0), x);
-    mesh.translate(new Vector3(0, 0, -1), z);
 
-    return function onDestroy() {
-      mesh.dispose();
-    };
+  node.position.set(x, 0, z);
+
+  onDestroy(() => {
+    node.dispose();
   });
 </script>
 
 <QuestionRoom
-  {mesh}
+  parent={node}
   {choice}
   on:yes={() => {
     choice = "YES";
@@ -44,11 +42,11 @@
     choice = "NO";
   }}
 />
-<Sign {mesh} text={question} background="#5631E8" />
+<Sign parent={node} text={question} background="#5631E8" />
 
 {#if yes && choice === "YES"}
-  <Node id="yes" data={yes} x={x + 5} z={z + 1.45} parent={mesh} />
+  <NodeComponent id="yes" data={yes} x={5} z={-1.45} parent={node} />
 {/if}
 {#if no && choice === "NO"}
-  <Node id="no" data={no} x={x + 5} z={z - 1.45} parent={mesh} />
+  <NodeComponent id="no" data={no} x={5} z={+1.45} parent={node} />
 {/if}

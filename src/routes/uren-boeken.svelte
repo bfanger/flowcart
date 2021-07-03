@@ -3,10 +3,11 @@
   import FlowCartProvider from "$lib/FlowCartProvider.svelte";
   import Node from "$lib/Node.svelte";
   import type { FlowCartData } from "$lib/types";
-  const red = "#FF4F68";
-  const green = "#2AF9C9";
-  const yellow = "#FFD833";
-  const black = "#06023E";
+
+  const red = "#ff4f68";
+  const green = "#2af9c9";
+  const yellow = "#ffd833";
+  const black = "#06023e";
 
   const data: FlowCartData = {
     question: "Werk voor een klant?",
@@ -55,7 +56,7 @@
       },
       no: {
         question: "Verlof / verzuim?",
-        yes: { answer: "Boe op juiste interne projectpost", color: yellow },
+        yes: { answer: "Boek op juiste interne projectpost", color: yellow },
         no: {
           question: "Stage gerelateerd?",
           yes: { answer: "Boek op juiste stagepost", color: red },
@@ -69,7 +70,7 @@
             no: {
               question: "Team of eigen performance verbeteren?",
               yes: {
-                question: "Intere performance verbeteren?",
+                question: "Interne performance verbeteren?",
                 yes: {
                   answer:
                     "Boek Professionalisering met een duidelijke omschrijving",
@@ -85,16 +86,17 @@
                 answer:
                   "Kan nergens anders op? Boek Diversen met een duidelijke omschrijving",
                 color: black,
+                textColor: "white",
               },
             },
           },
         },
       },
     },
-  } as const;
+  };
 </script>
 
-<Babylon depth={7}>
+<Babylon depth={8}>
   <FlowCartProvider>
     <Node id="flowcart" {data} />
   </FlowCartProvider>

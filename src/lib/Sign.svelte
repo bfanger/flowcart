@@ -2,14 +2,14 @@
   import {
     Color3,
     DynamicTexture,
-    Mesh,
+    Node,
     MeshBuilder,
     StandardMaterial,
   } from "@babylonjs/core";
 
   import { getBabylonContext } from "./Babylon.svelte";
 
-  export let mesh: Mesh;
+  export let parent: Node;
   export let text: string;
   export let color: string = "white";
   export let background: string;
@@ -22,6 +22,7 @@
     { width: big ? 4 : 2, height: big ? 1 : 0.3 },
     scene
   );
+  sign.setParent(parent);
   sign.position.set(4.99, big ? 1 : 2.1, 2.5);
   sign.rotation.set(0, 0.5 * Math.PI, 0);
 
@@ -41,7 +42,6 @@
 
   const font = "bold 44px monospace";
   textureGround.drawText(text, 70, 80, font, color, background, true, true);
-  mesh.addChild(sign);
 </script>
 
 <slot />

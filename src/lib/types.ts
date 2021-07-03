@@ -8,6 +8,7 @@ export type QuestionData = {
 export type AnswerData = {
   answer: string;
   color: string;
+  textColor?: string;
 };
 
 export type FlowCartData = QuestionData | AnswerData;

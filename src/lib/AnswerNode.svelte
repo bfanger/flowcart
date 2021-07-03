@@ -1,35 +1,32 @@
 <script lang="ts">
   import AnswerRoom from "$lib/AnswerRoom.svelte";
   import Sign from "$lib/Sign.svelte";
-  import { onMount } from "svelte";
-  import { Mesh, Vector3 } from "@babylonjs/core";
+  import { onDestroy } from "svelte";
+  import { TransformNode, Node } from "@babylonjs/core";
   import { getBabylonContext } from "./Babylon.svelte";
 
   export let answer: string;
   export let color: string;
-  export let parent: Mesh = undefined;
+  export let textColor = "#2F263F";
+  export let parent: Node;
   export let id: string;
 
   export let x = 0;
   export let z = 0;
 
-  const textColor = "#2F263F";
   const { scene } = getBabylonContext();
 
-  const mesh = new Mesh(id, scene);
+  const node = new TransformNode(id, scene);
   if (parent) {
-    parent.addChild(mesh);
+    node.setParent(parent);
   }
-  onMount(() => {
-    mesh.translate(new Vector3(1, 0, 0), x);
-    mesh.translate(new Vector3(0, 0, -1), z);
+  node.position.set(x, 0, z);
 
-    return function onDestroy() {
-      mesh.dispose();
-    };
+  onDestroy(() => {
+    node.dispose();
   });
 </script>
 
-<AnswerRoom {mesh} />
+<AnswerRoom parent={node} />
 
-<Sign {mesh} text={answer} color={textColor} background={color} big />
+<Sign parent={node} text={answer} color={textColor} background={color} big />

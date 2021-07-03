@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Mesh } from "@babylonjs/core";
+  import type { Node } from "@babylonjs/core";
   import AnswerNode from "./AnswerNode.svelte";
   import QuestionNode from "./QuestionNode.svelte";
   import type { AnswerData, FlowCartData, QuestionData } from "./types";
@@ -9,7 +9,7 @@
   export let id: string;
   export let x = 0;
   export let z = 0;
-  export let parent: Mesh | undefined = undefined;
+  export let parent: Node | undefined = undefined;
 
   $: question = asQuestion(data);
   $: answer = asAnswer(data);
@@ -46,6 +46,7 @@
   <AnswerNode
     answer={answer.answer}
     color={answer.color}
+    textColor={answer.textColor}
     {id}
     {x}
     {z}

@@ -5,7 +5,10 @@
 <div class="background" style="background-image: url('{background}')">
   <div class="panel">
     <h1>Welkom bij FlowCart</h1>
-    <p>Een VR experiment door Bob Fanger</p>
+    <p>
+      Een VR experiment gemaakt door <a href="https://bfanger.nl/">Bob Fanger</a
+      >
+    </p>
     <a class="button" href="/uren-boeken">Start</a>
   </div>
 </div>
@@ -33,6 +36,9 @@
   h1 {
     font-size: 50px;
   }
+  a {
+    color: inherit;
+  }
   .button {
     display: inline-block;
     font-size: 40px;
@@ -44,5 +50,6 @@
     text-shadow: none;
     text-decoration: none;
     box-shadow: #9e3242 0 0 10px 0px;
+    letter-spacing: 1px;
   }
 </style>
