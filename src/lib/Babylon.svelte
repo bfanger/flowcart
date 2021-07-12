@@ -8,14 +8,12 @@
     StandardMaterial,
     Color3,
     HemisphericLight,
-    ActionManager,
     UniversalCamera,
   } from "@babylonjs/core";
 
   type BabylonContext = {
     engine: Engine;
     scene: Scene;
-    actionManager: ActionManager;
   };
   export function getBabylonContext() {
     return getContext<BabylonContext>("Babylon");
@@ -29,18 +27,24 @@
   let canvas: HTMLCanvasElement;
   let ready = false;
 
+  const gravity = true;
+  const collisionsEnabled = true;
   const context: BabylonContext = {} as any;
   setContext("Babylon", context);
 
   onMount(() => {
     const engine = (context.engine = new Engine(canvas));
     const scene = (context.scene = new Scene(engine));
-    context.actionManager = new ActionManager(scene);
+    if (gravity) {
+      scene.gravity = new Vector3(0, -9.81 / 60, 0);
+    }
+    scene.collisionsEnabled = collisionsEnabled;
 
     const ground = MeshBuilder.CreateGround("ground", {
       width: 5 * depth,
       height: depth * 1.35 * 2,
     });
+    ground.checkCollisions = true;
     ground.position.set(depth * 2.5, -0.001, 0);
     const groundMaterial = new StandardMaterial("ground", scene);
     groundMaterial.diffuseColor = new Color3(0.01, 0.01, 0.01);
@@ -55,6 +59,12 @@
     );
     camera.setTarget(new Vector3(5, 1.5, 2.5));
     camera.attachControl();
+    camera.speed = 0.2;
+    camera.minZ = 0.05;
+    camera.ellipsoid = new Vector3(0.1, 0.5, 0.1);
+    camera.ellipsoidOffset = new Vector3(0, -0.5, 0);
+    camera.checkCollisions = true;
+    camera.applyGravity = gravity;
 
     new HemisphericLight("sun", new Vector3(0, 0, 0), scene);
 

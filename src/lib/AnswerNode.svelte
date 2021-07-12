@@ -29,4 +29,11 @@
 
 <AnswerRoom parent={node} />
 
-<Sign parent={node} text={answer} color={textColor} background={color} big />
+<Sign
+  parent={node}
+  text={answer}
+  color={textColor}
+  background={color}
+  big
+  checkCollisions
+/>

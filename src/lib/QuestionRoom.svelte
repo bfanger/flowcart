@@ -5,8 +5,12 @@
     ExecuteCodeAction,
     Node,
     Animation,
-    Quaternion,
     AbstractMesh,
+    MeshBuilder,
+    Color3,
+    StandardMaterial,
+    Vector3,
+    TransformNode,
   } from "@babylonjs/core";
   import { getFlowCartContext } from "./FlowCartProvider.svelte";
   import { getBabylonContext } from "./Babylon.svelte";
@@ -47,6 +51,21 @@
     );
     addDoorAnimation(door, index === 0);
   });
+
+  const blockYes = createBlockage("blockYes", yes);
+  const blockNo = createBlockage("blockYes", no);
+
+  function createBlockage(id: string, yesOrNo: TransformNode) {
+    const plane = MeshBuilder.CreatePlane(id, { width: 1.4, height: 2 }, scene);
+    plane.setParent(yesOrNo);
+    plane.position.set(-0.14, 1, 0);
+    plane.rotation.set(0, Math.PI / 2, 0);
+    plane.rotationQuaternion = null;
+    plane.checkCollisions = true;
+    plane.isVisible = false;
+    return plane;
+  }
+
   function addDoorAnimation(door: AbstractMesh, left: boolean) {
     const animation = new Animation(
       "door" + (left ? "Left" : "Right"),
@@ -74,17 +93,21 @@
     if (to === "YES") {
       scene.beginAnimation(yesLeft, 0, 5);
       scene.beginAnimation(yesRight, 0, 5);
+      blockYes.checkCollisions = false;
       if (from === "NO") {
         scene.beginAnimation(noLeft, 9, 10);
         scene.beginAnimation(noRight, 9, 10);
+        blockNo.checkCollisions = true;
       }
     }
     if (to === "NO") {
       scene.beginAnimation(noLeft, 0, 5);
       scene.beginAnimation(noRight, 0, 5);
+      blockNo.checkCollisions = false;
       if (from === "YES") {
         scene.beginAnimation(yesLeft, 9, 10);
         scene.beginAnimation(yesRight, 9, 10);
+        blockYes.checkCollisions = true;
       }
     }
   }

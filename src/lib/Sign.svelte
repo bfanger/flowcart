@@ -14,7 +14,7 @@
   export let color: string = "white";
   export let background: string;
   export let big: boolean = false;
-
+  export let checkCollisions: boolean = false;
   const { scene } = getBabylonContext();
 
   const sign = MeshBuilder.CreatePlane(
@@ -23,6 +23,7 @@
     scene
   );
   sign.setParent(parent);
+  sign.checkCollisions = checkCollisions;
   sign.position.set(4.99, big ? 1 : 2.1, 2.5);
   sign.rotation.set(0, 0.5 * Math.PI, 0);
 

@@ -25,9 +25,9 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "next",
-    "@sveltejs/kit": "^1.0.0-next.120",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
+    "@sveltejs/kit": "next",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
     "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.1.0",
@@ -38,13 +38,13 @@
     "lint-staged": "^11.0.0",
     "prettier": "~2.3.2",
     "prettier-plugin-svelte": "^2.3.1",
-    "sass": "^1.35.1",
+    "sass": "^1.35.2",
     "svelte": "^3.38.3",
-    "svelte-check": "^2.2.0",
-    "svelte-preprocess": "^4.0.0",
+    "svelte-check": "^2.2.2",
+    "svelte-preprocess": "^4.7.4",
     "tslib": "^2.0.0",
     "typescript": "^4.3.5",
-    "vite": "^2.3.8"
+    "vite": "^2.4.1"
   },
   "dependencies": {
     "@babylonjs/core": "^4.2.0",
