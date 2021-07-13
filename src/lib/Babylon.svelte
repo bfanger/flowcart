@@ -104,6 +104,7 @@
       context.scene.debugLayer.hide();
     }
   }
+  $: style = debug ? "" : "width: 100vw; height: 100vh";
 </script>
 
 {#if ready}
@@ -111,7 +112,7 @@
 {:else}
   <h1>Bezig met laden...</h1>
 {/if}
-<canvas bind:this={canvas} />
+<canvas bind:this={canvas} {style} />
 
 <style>
   h1 {
