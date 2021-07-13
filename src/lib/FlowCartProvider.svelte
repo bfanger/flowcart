@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import { AbstractMesh, MeshBuilder, Scene } from "@babylonjs/core";
+  import { Node, MeshBuilder, Scene } from "@babylonjs/core";
 
   type FlowCartContext = {
     assets: Scene;
@@ -20,13 +20,12 @@
   const { scene } = getBabylonContext();
 
   const context: FlowCartContext = { assets: undefined as any };
-
   setContext("FlowCart", context);
 
-  let ref: AbstractMesh;
+  const refs: Node[] = [];
   SceneLoader.Append("/", "flow-cart.glb", scene, (assets) => {
     context.assets = assets;
-    ref = assets.getMeshByID("__root__");
+    refs.push(assets.getMeshByID("__root__"));
 
     const walls = assets.getMeshByID("QuestionRoom_primitive0");
     walls.checkCollisions = true;
@@ -40,6 +39,7 @@
     blockStart.rotation.set(0, Math.PI / -2, 0);
     blockStart.rotationQuaternion = null;
     blockStart.checkCollisions = true;
+    refs.push(blockStart);
 
     assets.lights.forEach((light) => {
       light.intensity *= 0.3;
@@ -48,7 +48,7 @@
   });
 
   onDestroy(() => {
-    ref.dispose();
+    refs.forEach((ref) => ref.dispose());
   });
 </script>
 

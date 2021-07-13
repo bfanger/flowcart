@@ -6,7 +6,7 @@
     MeshBuilder,
     StandardMaterial,
   } from "@babylonjs/core";
-
+  import { onDestroy } from "svelte";
   import { getBabylonContext } from "./Babylon.svelte";
 
   export let parent: Node;
@@ -24,7 +24,7 @@
   );
   sign.setParent(parent);
   sign.checkCollisions = checkCollisions;
-  sign.position.set(4.99, big ? 1 : 2.1, 2.5);
+  sign.position.set(4.99, big ? 1.2 : 2.1, 2.5);
   sign.rotation.set(0, 0.5 * Math.PI, 0);
 
   const textureGround = new DynamicTexture(
@@ -43,6 +43,10 @@
 
   const font = "bold 44px monospace";
   textureGround.drawText(text, 70, 80, font, color, background, true, true);
+
+  onDestroy(() => {
+    sign.dispose();
+  });
 </script>
 
 <slot />

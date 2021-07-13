@@ -4,16 +4,15 @@
     Scene,
     Engine,
     Vector3,
-    MeshBuilder,
-    StandardMaterial,
-    Color3,
     HemisphericLight,
     UniversalCamera,
+    WebXRMotionControllerTeleportation,
   } from "@babylonjs/core";
 
   type BabylonContext = {
     engine: Engine;
     scene: Scene;
+    teleportation?: WebXRMotionControllerTeleportation;
   };
   export function getBabylonContext() {
     return getContext<BabylonContext>("Babylon");
@@ -22,14 +21,14 @@
 
 <script lang="ts">
   export let debug = false;
-  export let depth: number;
 
   let canvas: HTMLCanvasElement;
   let ready = false;
 
+  const vr = true;
   const gravity = true;
   const collisionsEnabled = true;
-  const context: BabylonContext = {} as any;
+  const context: BabylonContext = {} as any; // The context wil be set when the <slot /> is rendered
   setContext("Babylon", context);
 
   onMount(() => {
@@ -39,17 +38,6 @@
       scene.gravity = new Vector3(0, -9.81 / 60, 0);
     }
     scene.collisionsEnabled = collisionsEnabled;
-
-    const ground = MeshBuilder.CreateGround("ground", {
-      width: 5 * depth,
-      height: depth * 1.35 * 2,
-    });
-    ground.checkCollisions = true;
-    ground.position.set(depth * 2.5, -0.001, 0);
-    const groundMaterial = new StandardMaterial("ground", scene);
-    groundMaterial.diffuseColor = new Color3(0.01, 0.01, 0.01);
-    ground.material = groundMaterial;
-    const vr = true;
 
     let promise: Promise<void>;
     const camera = new UniversalCamera(
@@ -71,9 +59,12 @@
     if (vr) {
       promise = scene
         .createDefaultXRExperienceAsync({
-          floorMeshes: [ground],
+          floorMeshes: [],
         })
-        .then(() => undefined);
+        .then(({ teleportation }) => {
+          context.teleportation = teleportation;
+          return undefined;
+        });
     } else {
       promise = Promise.resolve();
     }
@@ -117,6 +108,10 @@
 <style>
   h1 {
     font: bold 20px sans-serif;
+    padding: 20px;
+    text-align: center;
+    background: #333;
+    color: white;
   }
   canvas {
     width: 100%;

@@ -7,9 +7,6 @@
     Animation,
     AbstractMesh,
     MeshBuilder,
-    Color3,
-    StandardMaterial,
-    Vector3,
     TransformNode,
   } from "@babylonjs/core";
   import { getFlowCartContext } from "./FlowCartProvider.svelte";
@@ -18,17 +15,20 @@
 
   export let parent: Node;
   export let choice: Choice;
+
   let prevChoice = choice;
   $: animateDoors(prevChoice, choice);
 
-  const { scene } = getBabylonContext();
+  const { scene, teleportation } = getBabylonContext();
   const { assets } = getFlowCartContext();
   const dispatch = createEventDispatcher();
+  const refs: Node[] = [];
 
   const room = assets
     .getTransformNodeByID("QuestionRoom")
     .clone("room", parent);
   room.scaling.set(1, 1, -1);
+  refs.push(room);
 
   const yes = assets.getTransformNodeByID("Yes").clone("yes", room);
   yes.getChildMeshes().forEach((door, index) => {
@@ -63,6 +63,7 @@
     plane.rotationQuaternion = null;
     plane.checkCollisions = true;
     plane.isVisible = false;
+    refs.push(plane);
     return plane;
   }
 
@@ -112,9 +113,24 @@
     }
   }
 
+  if (teleportation) {
+    const target = MeshBuilder.CreateGround(
+      "teleportTarget",
+      { width: 5, height: 5 },
+      scene
+    );
+    target.setParent(room);
+    target.position.set(2.5, 0, -2.5);
+    target.isVisible = false;
+    refs.push(target);
+    teleportation.addFloorMesh(target);
+
+    onDestroy(() => {
+      teleportation.removeFloorMesh(target);
+    });
+  }
   onDestroy(() => {
-    no.dispose();
-    yes.dispose();
+    refs.forEach((ref) => ref.dispose());
   });
 </script>
 
