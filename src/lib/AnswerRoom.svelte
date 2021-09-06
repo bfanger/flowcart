@@ -24,6 +24,7 @@
   blockEnd.setParent(parent);
   blockEnd.rotation.set(0, Math.PI / 2, 0);
   blockEnd.position.set(4.999, 1.25, 2.5);
+  blockEnd.checkCollisions = true;
   refs.push(blockEnd);
   if (teleportation) {
     const target = MeshBuilder.CreateGround(
