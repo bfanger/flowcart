@@ -6,16 +6,7 @@ import adapter from "@sveltejs/adapter-static";
 export default {
   preprocess: preprocess(),
   kit: {
-    target: "svelte-app",
+    prerender: { default: true },
     adapter: adapter(),
-    vite: {
-      optimizeDeps: {
-        include: [
-          "@babylonjs/core",
-          "@babylonjs/loaders",
-          "@babylonjs/inspector",
-        ],
-      },
-    },
   },
 };

@@ -1,7 +1,3 @@
-<script lang="ts" context="module">
-  export const ssr = false;
-</script>
-
 <script lang="ts">
   import Babylon from "$lib/Babylon.svelte";
   import FlowCartProvider from "$lib/FlowCartProvider.svelte";
@@ -100,7 +96,7 @@
   };
 </script>
 
-<Babylon depth={8}>
+<Babylon>
   <FlowCartProvider>
     <Node id="flowcart" {data} />
   </FlowCartProvider>
