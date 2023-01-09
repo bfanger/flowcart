@@ -7,12 +7,12 @@
   const red = "#ff4f68";
   const green = "#2af9c9";
   const yellow = "#ffd833";
-  const black = "#06023e";
+  const black = "#000000";
 
   const data: FlowCartData = {
     question: "Did you work on a specific project?",
     yes: {
-      question: "Do you have access to the project in QICS?",
+      question: "Do you have access to the project\nin QICS?",
       yes: {
         answer: "Book on project with the relevant article & clear description",
         color: red,
@@ -26,7 +26,7 @@
       question: "Is the work for an existing client?",
       yes: {
         question:
-          "Can you divide your spent hours over the different customer projects?",
+          "Can you divide your spent hours over\nthe different customer projects?",
         yes: {
           answer:
             "Book on project with the relevant article & clear description",
@@ -38,12 +38,12 @@
         },
       },
       no: {
-        question: "Are you trying to land new business for a (new) client?",
+        question: "Are you trying to land new business\nfor a (new) client?",
         yes: {
-          question: "Is the sales activity upsell for an existing project?",
+          question: "Is the sales activity upsell for\nan existing project?",
           yes: {
             answer:
-              "See if you can book your hours on the existing project, if in doubt, ask the relevant project manager",
+              "See if you can book your hours on the existing project, if in doubt,\nask the relevant project manager",
             color: red,
           },
           no: {
@@ -52,7 +52,7 @@
           },
         },
         no: {
-          question: "Is your work related to an internship?",
+          question: "Is your work related to an\ninternship?",
           yes: {
             answer:
               "Book Internship with the relevant article & clear description",
@@ -60,14 +60,14 @@
           },
           no: {
             question:
-              "Is your work related to making Triple, colleagues or yourself better?",
+              "Related to making Triple,\ncolleagues or yourself better?",
             yes: {
               answer:
-                "Book Triple professionalisation with the relevant article & clear description",
+                "Book Triple professionalisation with the relevant article and\nclear description",
               color: yellow,
             },
             no: {
-              question: "Is your work related to a Triple event or meeting?",
+              question: "Is your work related to a\nTriple event or meeting?",
               yes: {
                 answer: "Book Triple events & meetings",
                 color: green,

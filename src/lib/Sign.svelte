@@ -19,7 +19,7 @@
 
   const sign = MeshBuilder.CreatePlane(
     "sign",
-    { width: big ? 4 : 2, height: big ? 1 : 0.3 },
+    { width: big ? 4 : 2.2, height: big ? 1 : 0.3 },
     scene
   );
   sign.setParent(parent);
@@ -41,8 +41,24 @@
   material.emissiveTexture = textureGround;
   sign.material = material;
 
-  const font = "bold 44px monospace";
-  textureGround.drawText(text, 70, 80, font, color, background, true, true);
+  const font = "bold 42px monospace";
+  const lines = text.split("\n");
+  if (lines.length === 1) {
+    textureGround.drawText(text, 64, 80, font, color, background, true, true);
+  } else {
+    lines.forEach((line, i) => {
+      textureGround.drawText(
+        line,
+        64,
+        54 + i * 44,
+        font,
+        color,
+        i === 0 ? background : null,
+        true,
+        true
+      );
+    });
+  }
 
   onDestroy(() => {
     sign.dispose();
