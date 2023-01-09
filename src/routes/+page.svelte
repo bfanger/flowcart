@@ -4,10 +4,10 @@
 
 <div class="background" style="background-image: url('{background}')">
   <div class="panel">
-    <h1>Welkom bij FlowCart</h1>
+    <h1>Welcome to FlowCart</h1>
     <p>
-      Een VR experiment gemaakt door <a href="https://bfanger.nl/">Bob Fanger</a
-      >
+      A VR experiment made my <a href="https://bfanger.nl/">Bob Fanger</a><br />
+      <small>(Use arrow keys to move and click to open doors)</small>
     </p>
     <a class="button" href="/uren-boeken">Start</a>
   </div>

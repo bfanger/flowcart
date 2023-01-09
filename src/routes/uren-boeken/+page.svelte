@@ -10,83 +10,78 @@
   const black = "#06023e";
 
   const data: FlowCartData = {
-    question: "Werk voor een klant?",
+    question: "Did you work on a specific project?",
     yes: {
-      question: "Werk voor een lopend traject?",
+      question: "Do you have access to the project in QICS?",
       yes: {
-        question: "Toegang tot project in QICS?",
-        yes: {
-          question: "Facturabele uren?",
-          yes: {
-            answer:
-              "Boek op project met juiste artikel en duidelijke omschrijving",
-            color: red,
-          },
-          no: {
-            answer:
-              "Boek op project met juiste indirecte artikel en duidelijke omschrijving",
-            color: green,
-          },
-        },
-        no: { answer: "Vraag toegang aan PM", color: green },
+        answer: "Book on project with the relevant article & clear description",
+        color: red,
       },
       no: {
-        question: "Werkt bestaande klant?",
-        yes: {
-          answer: "Boek klantinvestering met een duidelijke omschrijving",
-          color: yellow,
-        },
-        no: {
-          answer:
-            "Boek sales activiteiten (nieuwe klanten) met een duidelijke omschrijving",
-          color: yellow,
-        },
+        answer: "Ask the projectmanager to add you to a project",
+        color: black,
       },
     },
     no: {
-      question: "Intern project?",
+      question: "Is the work for an existing client?",
       yes: {
-        question: "Toegang tot project in QICS?",
+        question:
+          "Can you divide your spent hours over the different customer projects?",
         yes: {
           answer:
-            "Boek op project met juiste artikel en duidelijke omschrijving",
+            "Book on project with the relevant article & clear description",
           color: red,
         },
-        no: { answer: "Vraag toegang aan PM", color: green },
+        no: {
+          answer: "Book Client investment project with a clear description",
+          color: red,
+        },
       },
       no: {
-        question: "Verlof / verzuim?",
-        yes: { answer: "Boek op juiste interne projectpost", color: yellow },
-        no: {
-          question: "Stage gerelateerd?",
-          yes: { answer: "Boek op juiste stagepost", color: red },
+        question: "Are you trying to land new business for a (new) client?",
+        yes: {
+          question: "Is the sales activity upsell for an existing project?",
+          yes: {
+            answer:
+              "See if you can book your hours on the existing project, if in doubt, ask the relevant project manager",
+            color: red,
+          },
           no: {
-            question: "Meeting niet klant?",
+            answer: "Book Sales / Client investment with a clear description",
+            color: yellow,
+          },
+        },
+        no: {
+          question: "Is your work related to an internship?",
+          yes: {
+            answer:
+              "Book Internship with the relevant article & clear description",
+            color: red,
+          },
+          no: {
+            question:
+              "Is your work related to making Triple, colleagues or yourself better?",
             yes: {
               answer:
-                "Book Meeting (niet klant) met een duidelijke omschrijving",
-              color: green,
+                "Book Triple professionalisation with the relevant article & clear description",
+              color: yellow,
             },
             no: {
-              question: "Team of eigen performance verbeteren?",
+              question: "Is your work related to a Triple event or meeting?",
               yes: {
-                question: "Interne performance verbeteren?",
+                answer: "Book Triple events & meetings",
+                color: green,
+              },
+              no: {
+                question: "Leave or sick leave",
                 yes: {
-                  answer:
-                    "Boek Professionalisering met een duidelijke omschrijving",
+                  answer: "Book Leave with a clear description",
                   color: yellow,
                 },
                 no: {
-                  answer:
-                    "Boek conferenties / cursus met een duidelijke omschrijving",
-                  color: red,
+                  answer: "Book Last resort with a clear description",
+                  color: green,
                 },
-              },
-              no: {
-                answer:
-                  "Kan nergens anders op? Boek Diversen met een duidelijke omschrijving",
-                color: black,
-                textColor: "white",
               },
             },
           },
