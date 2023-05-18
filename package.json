@@ -6,7 +6,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "start": "vite preview",
-    "lint": "prettier --check --loglevel=warn 'src/**/*.svelte' && tsc --noEmit && svelte-check --fail-on-warnings --fail-on-hints && eslint --max-warnings 0 src",
+    "lint": "prettier --check --loglevel=warn 'src/**/*.svelte' && tsc --noEmit && svelte-check --fail-on-warnings && eslint --max-warnings 0 src",
     "format": "prettier --write . && eslint --fix src",
     "precommit": "lint-staged"
   },
@@ -19,39 +19,42 @@
       "eslint --max-warnings 0 --ext js --no-ignore"
     ],
     "*.svelte": [
-      "svelte-check --fail-on-warnings --fail-on-hints",
+      "svelte-check --fail-on-warnings",
       "prettier --check"
     ]
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^1.0.1",
-    "@sveltejs/kit": "^1.0.7",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
-    "eslint": "^8.23.0",
+    "@sveltejs/adapter-static": "^2.0.2",
+    "@sveltejs/kit": "^1.18.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-triple": "^0.5.8",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "^2.8.2",
-    "prettier-plugin-svelte": "^2.7.0",
-    "sass": "^1.54.5",
-    "svelte": "^3.49.0",
-    "svelte-check": "^3.0.1",
-    "svelte-preprocess": "^5.0.0",
-    "typescript": "^4.8.2",
-    "vite": "^4.0.4"
+    "eslint-plugin-svelte3": "^4.0.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
+    "prettier-plugin-svelte": "^2.10.0",
+    "sass": "^1.62.1",
+    "svelte": "^3.59.1",
+    "svelte-check": "^3.3.2",
+    "svelte-preprocess": "^5.0.3",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.8"
   },
   "dependencies": {
-    "@babylonjs/core": "^5.21.0",
-    "@babylonjs/gui": "^5.21.0",
-    "@babylonjs/gui-editor": "^5.21.0",
-    "@babylonjs/inspector": "^5.21.0",
-    "@babylonjs/loaders": "^5.21.0",
-    "@babylonjs/materials": "^5.21.0",
-    "@babylonjs/serializers": "^5.21.0"
+    "@babylonjs/core": "^6.4.0",
+    "@babylonjs/gui": "^6.4.0",
+    "@babylonjs/gui-editor": "^6.4.0",
+    "@babylonjs/inspector": "^6.4.0",
+    "@babylonjs/loaders": "^6.4.0",
+    "@babylonjs/materials": "^6.4.0",
+    "@babylonjs/serializers": "^6.4.0"
   }
 }

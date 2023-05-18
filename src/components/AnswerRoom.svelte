@@ -11,7 +11,7 @@
   const refs: Node[] = [];
 
   const room = assets
-    .getTransformNodeByID("QuestionRoom")
+    .getTransformNodeById("QuestionRoom")
     .clone("answerRoom", parent);
   room.scaling.set(1, 1, -1);
   refs.push(room);

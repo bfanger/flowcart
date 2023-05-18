@@ -2,7 +2,7 @@
   import type { Node } from "@babylonjs/core";
   import AnswerNode from "./AnswerNode.svelte";
   import QuestionNode from "./QuestionNode.svelte";
-  import type { AnswerData, FlowCartData, QuestionData } from "./types";
+  import type { AnswerData, FlowCartData, QuestionData } from "../types";
 
   export let data: FlowCartData;
 

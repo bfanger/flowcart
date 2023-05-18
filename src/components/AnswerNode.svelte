@@ -1,6 +1,6 @@
 <script lang="ts">
-  import AnswerRoom from "$lib/AnswerRoom.svelte";
-  import Sign from "$lib/Sign.svelte";
+  import AnswerRoom from "./AnswerRoom.svelte";
+  import Sign from "./Sign.svelte";
   import { onDestroy } from "svelte";
   import { TransformNode, Node } from "@babylonjs/core";
   import { getBabylonContext } from "./Babylon.svelte";

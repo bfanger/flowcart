@@ -2,7 +2,7 @@
   "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
     "moduleResolution": "node",
-    "target": "es2018",
+    "target": "ESNext",
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "sourceMap": true,
@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "jsx": "preserve",
     "allowJs": true,
     "checkJs": true
   }

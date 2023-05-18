@@ -114,8 +114,7 @@
     color: white;
   }
   canvas {
-    width: 100%;
-    height: 100%;
+    display: block;
     outline: none;
   }
 </style>

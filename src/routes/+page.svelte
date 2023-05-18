@@ -1,5 +1,11 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { preloadCode } from "$app/navigation";
   import background from "../assets/mine-cave.jpg";
+
+  onMount(() => {
+    preloadCode("/uren-boeken");
+  });
 </script>
 
 <div class="background" style="background-image: url('{background}')">

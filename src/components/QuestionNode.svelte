@@ -1,8 +1,8 @@
 <script lang="ts">
-  import QuestionRoom from "$lib/QuestionRoom.svelte";
-  import Sign from "$lib/Sign.svelte";
-  import NodeComponent from "$lib/Node.svelte";
-  import type { FlowCartData, Choice } from "./types";
+  import QuestionRoom from "./QuestionRoom.svelte";
+  import Sign from "./Sign.svelte";
+  import NodeComponent from "./Node.svelte";
+  import type { FlowCartData, Choice } from "../types";
   import { onDestroy } from "svelte";
   import { Node, TransformNode } from "@babylonjs/core";
   import { getBabylonContext } from "./Babylon.svelte";

@@ -11,7 +11,7 @@
   } from "@babylonjs/core";
   import { getFlowCartContext } from "./FlowCartProvider.svelte";
   import { getBabylonContext } from "./Babylon.svelte";
-  import type { Choice } from "./types";
+  import type { Choice } from "../types";
 
   export let parent: Node;
   export let choice: Choice;
@@ -25,12 +25,12 @@
   const refs: Node[] = [];
 
   const room = assets
-    .getTransformNodeByID("QuestionRoom")
+    .getTransformNodeById("QuestionRoom")
     .clone("room", parent);
   room.scaling.set(1, 1, -1);
   refs.push(room);
 
-  const yes = assets.getTransformNodeByID("Yes").clone("yes", room);
+  const yes = assets.getTransformNodeById("Yes").clone("yes", room);
   yes.getChildMeshes().forEach((door, index) => {
     door.rotation = door.rotationQuaternion.toEulerAngles();
     door.rotationQuaternion = null;
@@ -41,7 +41,7 @@
     addDoorAnimation(door, index === 0);
   });
 
-  const no = assets.getTransformNodeByID("No").clone("no", room);
+  const no = assets.getTransformNodeById("No").clone("no", room);
   no.getChildMeshes().forEach((door, index) => {
     door.rotation = door.rotationQuaternion.toEulerAngles();
     door.rotationQuaternion = null;
