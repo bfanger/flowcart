@@ -20,7 +20,7 @@
   const sign = MeshBuilder.CreatePlane(
     "sign",
     { width: big ? 4 : 2.2, height: big ? 1 : 0.3 },
-    scene
+    scene,
   );
   sign.setParent(parent);
   sign.checkCollisions = checkCollisions;
@@ -31,7 +31,7 @@
     "dynamic texture",
     { width: big ? 2048 : 1024, height: big ? 256 : 128 },
     scene,
-    true
+    true,
   );
 
   const material = new StandardMaterial("MatRoomQuestion", scene);
@@ -55,7 +55,7 @@
         color,
         i === 0 ? background : null,
         true,
-        true
+        true,
       );
     });
   }

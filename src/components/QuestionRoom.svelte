@@ -36,7 +36,7 @@
     door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
     door.actionManager.registerAction(
-      new ExecuteCodeAction(ActionManager.OnPickTrigger, () => dispatch("yes"))
+      new ExecuteCodeAction(ActionManager.OnPickTrigger, () => dispatch("yes")),
     );
     addDoorAnimation(door, index === 0);
   });
@@ -47,7 +47,7 @@
     door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
     door.actionManager.registerAction(
-      new ExecuteCodeAction(ActionManager.OnPickTrigger, () => dispatch("no"))
+      new ExecuteCodeAction(ActionManager.OnPickTrigger, () => dispatch("no")),
     );
     addDoorAnimation(door, index === 0);
   });
@@ -72,7 +72,7 @@
       "door" + (left ? "Left" : "Right"),
       "rotation.y",
       10,
-      Animation.ANIMATIONTYPE_FLOAT
+      Animation.ANIMATIONTYPE_FLOAT,
     );
     animation.setKeys([
       { frame: 0, value: 0 },
@@ -117,7 +117,7 @@
     const target = MeshBuilder.CreateGround(
       "teleportTarget",
       { width: 5, height: 5 },
-      scene
+      scene,
     );
     target.setParent(room);
     target.position.set(2.5, 0, -2.5);

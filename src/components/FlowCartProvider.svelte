@@ -33,7 +33,7 @@
     const blockStart = MeshBuilder.CreatePlane(
       "blockStart",
       { width: 1.4, height: 2 },
-      scene
+      scene,
     );
     blockStart.position.set(0.14, 1, 2.5);
     blockStart.rotation.set(0, Math.PI / -2, 0);

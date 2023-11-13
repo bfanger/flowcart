@@ -43,7 +43,7 @@
     const camera = new UniversalCamera(
       "camera",
       new Vector3(1, 1.5, 2.5),
-      scene
+      scene,
     );
     camera.setTarget(new Vector3(5, 1.5, 2.5));
     camera.attachControl();

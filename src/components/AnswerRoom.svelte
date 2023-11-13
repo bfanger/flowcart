@@ -19,7 +19,7 @@
   const blockEnd = MeshBuilder.CreatePlane(
     "blockEnd",
     { width: 5, height: 2.5 },
-    scene
+    scene,
   );
   blockEnd.setParent(parent);
   blockEnd.rotation.set(0, Math.PI / 2, 0);
@@ -30,7 +30,7 @@
     const target = MeshBuilder.CreateGround(
       "teleportTarget",
       { width: 5, height: 5 },
-      scene
+      scene,
     );
     target.setParent(room);
     target.position.set(2.5, 0, -2.5);
