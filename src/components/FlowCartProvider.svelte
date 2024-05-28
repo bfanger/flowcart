@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import { Node, MeshBuilder, Scene } from "@babylonjs/core";
+  import { Node, MeshBuilder, Scene, AbstractMesh } from "@babylonjs/core";
 
   type FlowCartContext = {
     assets: Scene;
@@ -25,9 +25,9 @@
   const refs: Node[] = [];
   SceneLoader.Append("/", "flow-cart.glb", scene, (assets) => {
     context.assets = assets;
-    refs.push(assets.getMeshByID("__root__"));
+    refs.push(assets.getMeshByID("__root__") as AbstractMesh);
 
-    const walls = assets.getMeshByID("QuestionRoom_primitive0");
+    const walls = assets.getMeshByID("QuestionRoom_primitive0") as AbstractMesh;
     walls.checkCollisions = true;
 
     const blockStart = MeshBuilder.CreatePlane(

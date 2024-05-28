@@ -8,7 +8,7 @@
   export let answer: string;
   export let color: string;
   export let textColor = "#2F263F";
-  export let parent: Node;
+  export let parent: Node | undefined;
   export let id: string;
 
   export let x = 0;

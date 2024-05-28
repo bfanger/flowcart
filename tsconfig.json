@@ -12,5 +12,6 @@
     "jsx": "preserve",
     "allowJs": true,
     "checkJs": true,
-  },
+    "strictNullChecks": true
+  }
 }

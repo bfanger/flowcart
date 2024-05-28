@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import { MeshBuilder, Node } from "@babylonjs/core";
+  import { MeshBuilder, Node, TransformNode } from "@babylonjs/core";
   import { getFlowCartContext } from "./FlowCartProvider.svelte";
   import { getBabylonContext } from "./Babylon.svelte";
 
@@ -12,7 +12,7 @@
 
   const room = assets
     .getTransformNodeById("QuestionRoom")
-    .clone("answerRoom", parent);
+    ?.clone("answerRoom", parent) as TransformNode;
   room.scaling.set(1, 1, -1);
   refs.push(room);
 

@@ -8,6 +8,7 @@
     AbstractMesh,
     MeshBuilder,
     TransformNode,
+    Quaternion,
   } from "@babylonjs/core";
   import { getFlowCartContext } from "./FlowCartProvider.svelte";
   import { getBabylonContext } from "./Babylon.svelte";
@@ -26,13 +27,15 @@
 
   const room = assets
     .getTransformNodeById("QuestionRoom")
-    .clone("room", parent);
+    ?.clone("room", parent) as TransformNode;
   room.scaling.set(1, 1, -1);
   refs.push(room);
 
-  const yes = assets.getTransformNodeById("Yes").clone("yes", room);
+  const yes = assets
+    .getTransformNodeById("Yes")
+    ?.clone("yes", room) as TransformNode;
   yes.getChildMeshes().forEach((door, index) => {
-    door.rotation = door.rotationQuaternion.toEulerAngles();
+    door.rotation = (door.rotationQuaternion as Quaternion).toEulerAngles();
     door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
     door.actionManager.registerAction(
@@ -41,9 +44,11 @@
     addDoorAnimation(door, index === 0);
   });
 
-  const no = assets.getTransformNodeById("No").clone("no", room);
-  no.getChildMeshes().forEach((door, index) => {
-    door.rotation = door.rotationQuaternion.toEulerAngles();
+  const no = assets
+    .getTransformNodeById("No")
+    ?.clone("no", room) as TransformNode;
+  no?.getChildMeshes().forEach((door, index) => {
+    door.rotation = (door.rotationQuaternion as Quaternion).toEulerAngles();
     door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
     door.actionManager.registerAction(

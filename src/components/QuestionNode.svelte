@@ -10,7 +10,7 @@
   export let question: string;
   export let yes: FlowCartData | undefined = undefined;
   export let no: FlowCartData | undefined = undefined;
-  export let parent: Node = undefined;
+  export let parent: Node | undefined = undefined;
   export let id: string;
 
   export let x = 0;
