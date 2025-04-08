@@ -1,13 +1,13 @@
 <script context="module" lang="ts">
-  import { getContext, onMount, setContext } from "svelte";
   import {
-    Scene,
     Engine,
-    Vector3,
     HemisphericLight,
+    Scene,
     UniversalCamera,
+    Vector3,
     WebXRMotionControllerTeleportation,
   } from "@babylonjs/core";
+  import { getContext, onMount, setContext } from "svelte";
 
   type BabylonContext = {
     engine: Engine;
@@ -47,6 +47,10 @@
     );
     camera.setTarget(new Vector3(5, 1.5, 2.5));
     camera.attachControl();
+    camera.keysUp.push(87); // w
+    camera.keysDown.push(83); // a
+    camera.keysLeft.push(65); // s
+    camera.keysRight.push(68); // d
     camera.speed = 0.2;
     camera.minZ = 0.05;
     camera.ellipsoid = new Vector3(0.1, 0.5, 0.1);
@@ -54,7 +58,7 @@
     camera.checkCollisions = true;
     camera.applyGravity = gravity;
 
-    new HemisphericLight("sun", new Vector3(0, 0, 0), scene);
+    scene.lights.push(new HemisphericLight("sun", new Vector3(0, 0, 0), scene));
 
     if (vr) {
       promise = scene
@@ -68,7 +72,7 @@
     } else {
       promise = Promise.resolve();
     }
-    promise.then(() => {
+    void promise.then(() => {
       ready = true;
       engine.runRenderLoop(() => {
         scene.render();
@@ -86,11 +90,13 @@
     };
   });
 
-  $: ready && toggleInspector(debug);
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  $: ready && void toggleInspector(debug);
+
   async function toggleInspector(enabled: boolean) {
     if (enabled) {
       await import("@babylonjs/inspector");
-      context.scene.debugLayer.show();
+      await context.scene.debugLayer.show();
     } else {
       context.scene.debugLayer.hide();
     }
@@ -103,7 +109,7 @@
 {:else}
   <h1>Bezig met laden...</h1>
 {/if}
-<canvas bind:this={canvas} {style} />
+<canvas bind:this={canvas} {style}></canvas>
 
 <style>
   h1 {

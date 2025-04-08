@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy } from "svelte";
   import {
-    ActionManager,
-    ExecuteCodeAction,
-    Node,
-    Animation,
     AbstractMesh,
+    ActionManager,
+    Animation,
+    ExecuteCodeAction,
     MeshBuilder,
-    TransformNode,
+    Node,
     Quaternion,
+    TransformNode,
   } from "@babylonjs/core";
-  import { getFlowCartContext } from "./FlowCartProvider.svelte";
-  import { getBabylonContext } from "./Babylon.svelte";
+  import { createEventDispatcher, onDestroy } from "svelte";
   import type { Choice } from "../types";
+  import { getBabylonContext } from "./Babylon.svelte";
+  import { getFlowCartContext } from "./FlowCartProvider.svelte";
 
   export let parent: Node;
   export let choice: Choice;
@@ -35,6 +35,7 @@
     .getTransformNodeById("Yes")
     ?.clone("yes", room) as TransformNode;
   yes.getChildMeshes().forEach((door, index) => {
+    /* eslint-disable no-param-reassign */
     door.rotation = (door.rotationQuaternion as Quaternion).toEulerAngles();
     door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
@@ -74,7 +75,7 @@
 
   function addDoorAnimation(door: AbstractMesh, left: boolean) {
     const animation = new Animation(
-      "door" + (left ? "Left" : "Right"),
+      `door${left ? "Left" : "Right"}`,
       "rotation.y",
       10,
       Animation.ANIMATIONTYPE_FLOAT,

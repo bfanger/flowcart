@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+ 
 
 export type QuestionData = {
   question: string;

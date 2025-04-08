@@ -1,9 +1,9 @@
 <script lang="ts">
-  import AnswerRoom from "./AnswerRoom.svelte";
-  import Sign from "./Sign.svelte";
+  import { Node,TransformNode } from "@babylonjs/core";
   import { onDestroy } from "svelte";
-  import { TransformNode, Node } from "@babylonjs/core";
+  import AnswerRoom from "./AnswerRoom.svelte";
   import { getBabylonContext } from "./Babylon.svelte";
+  import Sign from "./Sign.svelte";
 
   export let answer: string;
   export let color: string;

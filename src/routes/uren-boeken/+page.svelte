@@ -1,8 +1,8 @@
 <script lang="ts">
+  import type { FlowCartData } from "../../types";
   import Babylon from "../../components/Babylon.svelte";
   import FlowCartProvider from "../../components/FlowCartProvider.svelte";
   import Node from "../../components/Node.svelte";
-  import type { FlowCartData } from "../../types";
 
   const red = "#ff4f68";
   const green = "#2af9c9";

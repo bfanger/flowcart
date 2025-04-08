@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import { Node, MeshBuilder, Scene, AbstractMesh } from "@babylonjs/core";
+  import { AbstractMesh, MeshBuilder, Node, Scene } from "@babylonjs/core";
 
   type FlowCartContext = {
     assets: Scene;
@@ -10,8 +10,8 @@
 </script>
 
 <script lang="ts">
-  import { SceneLoader } from "@babylonjs/core";
   import "@babylonjs/loaders";
+  import { SceneLoader } from "@babylonjs/core";
   import { getContext, onDestroy, setContext } from "svelte";
   import { getBabylonContext } from "./Babylon.svelte";
 
@@ -42,6 +42,7 @@
     refs.push(blockStart);
 
     assets.lights.forEach((light) => {
+      // eslint-disable-next-line no-param-reassign
       light.intensity *= 0.3;
     });
     ready = true;

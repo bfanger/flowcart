@@ -4,7 +4,7 @@
   import background from "../assets/mine-cave.jpg";
 
   onMount(() => {
-    preloadCode("/uren-boeken");
+    void preloadCode("/uren-boeken");
   });
 </script>
 

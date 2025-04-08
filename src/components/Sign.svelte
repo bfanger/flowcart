@@ -2,8 +2,8 @@
   import {
     Color3,
     DynamicTexture,
-    Node,
     MeshBuilder,
+    Node,
     StandardMaterial,
   } from "@babylonjs/core";
   import { onDestroy } from "svelte";

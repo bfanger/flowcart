@@ -1,11 +1,11 @@
 <script lang="ts">
+  import { Node, TransformNode } from "@babylonjs/core";
+  import { onDestroy } from "svelte";
+  import type { Choice,FlowCartData } from "../types";
+  import { getBabylonContext } from "./Babylon.svelte";
+  import NodeComponent from "./Node.svelte";
   import QuestionRoom from "./QuestionRoom.svelte";
   import Sign from "./Sign.svelte";
-  import NodeComponent from "./Node.svelte";
-  import type { FlowCartData, Choice } from "../types";
-  import { onDestroy } from "svelte";
-  import { Node, TransformNode } from "@babylonjs/core";
-  import { getBabylonContext } from "./Babylon.svelte";
 
   export let question: string;
   export let yes: FlowCartData | undefined = undefined;

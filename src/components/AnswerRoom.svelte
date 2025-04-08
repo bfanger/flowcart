@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
   import { MeshBuilder, Node, TransformNode } from "@babylonjs/core";
-  import { getFlowCartContext } from "./FlowCartProvider.svelte";
+  import { onDestroy } from "svelte";
   import { getBabylonContext } from "./Babylon.svelte";
+  import { getFlowCartContext } from "./FlowCartProvider.svelte";
 
   export let parent: Node;
 
