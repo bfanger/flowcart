@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Node, TransformNode } from "@babylonjs/core";
   import { onDestroy } from "svelte";
-  import type { Choice,FlowCartData } from "../types";
+  import type { Choice, FlowCartData } from "../types";
   import { getBabylonContext } from "./Babylon.svelte";
   import NodeComponent from "./Node.svelte";
   import QuestionRoom from "./QuestionRoom.svelte";

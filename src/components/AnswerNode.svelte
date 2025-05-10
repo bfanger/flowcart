@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Node,TransformNode } from "@babylonjs/core";
+  import { Node, TransformNode } from "@babylonjs/core";
   import { onDestroy } from "svelte";
   import AnswerRoom from "./AnswerRoom.svelte";
   import { getBabylonContext } from "./Babylon.svelte";

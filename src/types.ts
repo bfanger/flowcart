@@ -1,5 +1,3 @@
- 
-
 export type QuestionData = {
   question: string;
   yes: FlowCartData;
