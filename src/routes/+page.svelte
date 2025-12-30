@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { preloadCode } from "$app/navigation";
+  import { resolve } from "$app/paths";
   import background from "../assets/mine-cave.jpg";
 
   onMount(() => {
@@ -15,7 +16,7 @@
       A VR experiment made my <a href="https://bfanger.nl/">Bob Fanger</a><br />
       <small>(Use arrow keys to move and click to open doors)</small>
     </p>
-    <a class="button" href="/uren-boeken">Start</a>
+    <a class="button" href={resolve("/uren-boeken")}>Start</a>
   </div>
 </div>
 <slot />
