@@ -42,7 +42,6 @@
     refs.push(blockStart);
 
     assets.lights.forEach((light) => {
-      // eslint-disable-next-line no-param-reassign
       light.intensity *= 0.3;
     });
     ready = true;

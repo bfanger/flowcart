@@ -35,7 +35,6 @@
     .getTransformNodeById("Yes")
     ?.clone("yes", room) as TransformNode;
   yes.getChildMeshes().forEach((door, index) => {
-    /* eslint-disable no-param-reassign */
     door.rotation = (door.rotationQuaternion as Quaternion).toEulerAngles();
     door.rotationQuaternion = null;
     door.actionManager = new ActionManager(scene);
