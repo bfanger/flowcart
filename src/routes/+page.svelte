@@ -13,7 +13,7 @@
   <div class="panel">
     <h1>Welcome to FlowCart</h1>
     <p>
-      A VR experiment made my <a href="https://bfanger.nl/">Bob Fanger</a><br />
+      A VR experiment made by <a href="https://bfanger.nl/">Bob Fanger</a><br />
       <small>(Use arrow keys to move and click to open doors)</small>
     </p>
     <a class="button" href={resolve("/uren-boeken")}>Start</a>
