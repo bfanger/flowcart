@@ -11,6 +11,7 @@ export default ts.config(
     ignores: [
       ".svelte-kit",
       ".vercel",
+      ".pnpm-store",
       "build",
       "node_modules",
       "package",
